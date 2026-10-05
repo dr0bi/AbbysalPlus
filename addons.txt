@@ -5,3 +5,4 @@
 05_TeleportMarkers.luau
 06_ArchivesAutoDoors.luau
 07_OptimizationRooms.luau
+08.InfinityYield.luau
