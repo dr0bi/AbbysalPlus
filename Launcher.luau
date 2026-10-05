@@ -5,7 +5,7 @@
 -- 1) Put your GitHub name and repo name below.
 -- 2) Everyone runs:  loadstring(game:HttpGet("https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/Launcher.luau"))()
 
-local BaseUrl = "https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/"
+local BaseUrl = "https://raw.githubusercontent.com/dr0bi/AbbysalPlus/main/"
 local MainUrl = "https://raw.githubusercontent.com/therealcookiemonsterof1966/AbysallContinued/main/Games/Doors/Main.luau"
 
 if BaseUrl:find("YOUR_", 1, true) then
