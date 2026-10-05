@@ -6,3 +6,4 @@
 06_ArchivesAutoDoors.luau
 07_OptimizationRooms.luau
 08_InfY.luau
+09_NVSC.luau
