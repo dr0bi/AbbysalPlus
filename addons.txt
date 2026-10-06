@@ -5,4 +5,5 @@
 05_TeleportMarkers.luau
 06_ArchivesAutoDoors.luau
 07_OptimizationRooms.luau
+08_Anchor.luau
 09_NVSC.luau
