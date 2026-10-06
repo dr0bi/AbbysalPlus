@@ -8,7 +8,7 @@ return function(Window, Tab)
 	local Box = Tab:AddLeftGroupbox("AnchorBase Guide")
 	Box:AddToggle("AP_AnchorGuide", {
 		Text = "Show Path to AnchorBase", Default = false,
-		Tooltip = "Draws a path to the nearest AnchorBase. It only shows the way, you walk yourself."
+		Tooltip = "Draws a path to the nearest unused AnchorBase (Activated = false). It only shows the way, you walk yourself."
 	})
 	local Info = Box:AddLabel("AnchorBase: -")
 
@@ -28,10 +28,16 @@ return function(Window, Tab)
 		end
 	end
 
+	-- an anchor counts as used once its MinesAnchor model has the attribute Activated = true
+	local function IsActivated(Object)
+		local Anchor = Object:FindFirstAncestor("MinesAnchor")
+		return Anchor ~= nil and Anchor:GetAttribute("Activated") == true
+	end
+
 	local function FindNearest(From)
 		local Best, BestDistance
 		for _, Object in workspace:GetDescendants() do
-			if Object.Name == "AnchorBase" and (Object:IsA("Model") or Object:IsA("BasePart")) then
+			if Object.Name == "AnchorBase" and (Object:IsA("Model") or Object:IsA("BasePart")) and not IsActivated(Object) then
 				local Position = PositionOf(Object)
 				if Position then
 					local Distance = (Position - From).Magnitude
@@ -94,13 +100,13 @@ return function(Window, Tab)
 		local Root = Character and Character:FindFirstChild("HumanoidRootPart")
 		if not Root then return end
 
-		if not Target or not Target.Parent or os.clock() - LastScan > 3 then
+		if not Target or not Target.Parent or IsActivated(Target) or os.clock() - LastScan > 3 then
 			Target = FindNearest(Root.Position)
 			LastScan = os.clock()
 		end
 		if not Target then
 			Folder:ClearAllChildren()
-			Info:SetText("AnchorBase: not found")
+			Info:SetText("AnchorBase: none left (or not found)")
 			return
 		end
 
